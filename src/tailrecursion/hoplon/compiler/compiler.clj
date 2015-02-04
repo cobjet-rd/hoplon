@@ -80,9 +80,8 @@
   (let [[nsdecl & tlfs] forms]
     (if (= 'ns (first nsdecl))
       {:cljs (forms-str (cons (make-nsdecl nsdecl) tlfs)) :ns (second nsdecl)}
-      (let [[_ page & _] nsdecl
+      (let [[_ page-ns & _] nsdecl
             outpath (output-path forms)
-            page-ns (util/munge-page page)
             nsdecl (let [[h _ & t] (make-nsdecl nsdecl)]
                      `(~h ~page-ns ~@t))
             cljs `(~nsdecl

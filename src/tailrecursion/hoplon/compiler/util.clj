@@ -15,15 +15,8 @@
     (map (juxt #(second (drop-while (partial not= :as) %)) first))
     (into {})))
 
-(defn munge-page-name [x]
-  (-> (str "_" (name x)) (string/replace #"\." "_DOT_") munge))
-
-(defn munge-page [ns]
-  (let [ap "tailrecursion.hoplon.app-pages."]
-    (if (symbol? ns) ns (symbol (str ap (munge-page-name ns))))))
-
 (defn get-ns [forms-str]
-  (->> forms-str clojure.core/read-string second munge-page))
+  (->> forms-str clojure.core/read-string second))
 
 (defn read-string [forms-str]
   (binding [*ns*          (get-ns forms-str)
